@@ -64,6 +64,15 @@ const server = http.createServer(
 
             return;
         }
+        
+        if (req.method === "PUT" && req.url.startsWith("/itens/")) {
+            const partes = req.url.split("/");
+            const numeroItem = partes[2];
+
+            res.writeHead(200, { "Content-Type": "text/plain" });
+            res.end(`Item ${numeroItem} atualizado`);
+            return;
+        }
 
         res.writeHead(404);
         res.end();
