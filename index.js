@@ -20,6 +20,7 @@
 //
 // server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
 
+import { execFile } from 'node:child_process';
 import { log } from 'node:console';
 import http from 'node:http';
 
@@ -107,7 +108,20 @@ const server = http.createServer(
 
             return;
         }
-        
+
+        if (req.method === "GET" && req.url === "/secreto") {
+            const senha = req.headers["x-senha"];           
+
+            if (senha == "1234") {
+                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.end("Acesso liberado");
+            } else if (senha == undefined) {
+                res.writeHead(401, { "Content-Type": "text/plain" });
+                res.end();
+            }
+
+            return;
+        }        
         res.writeHead(404);
         res.end();
     }
