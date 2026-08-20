@@ -74,6 +74,12 @@ const server = http.createServer(
             return;
         }
 
+        if (req.method === "DELETE" && req.url.startsWith("/itens/")) {
+            res.writeHead(204, { "Content-Type": "text/plain" });
+            res.end();
+            return;
+        }
+
         res.writeHead(404);
         res.end();
     }
