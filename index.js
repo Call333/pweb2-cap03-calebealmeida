@@ -91,6 +91,22 @@ const server = http.createServer(
             res.end();
             return;
         }
+
+        if (req.method === "GET" && req.url === "/agente") {
+            const userAgent = req.headers["user-agent"];
+
+            res.writeHead(200, { "Content-Type": "text/plain" });
+            
+            if (userAgent.includes("curl")) {
+                res.end("Você é o cURL");
+            } else if(userAgent.includes("Chrome")) {
+                res.end("Você é um navegador");
+            } else {
+                res.end("Agente desconhecido");
+            }
+
+            return;
+        }
         
         res.writeHead(404);
         res.end();
