@@ -34,13 +34,6 @@ const server = http.createServer(
             return;
         }
 
-        if (req.method === "GET" && req.url === "/sobre") {
-            res.writeHead(200, { "Content-Type": "text/html" });
-            res.write('<h1>Sobre</h1>');
-            res.end();
-            return;
-        }
-
         res.writeHead(404);
         res.end();
     }
