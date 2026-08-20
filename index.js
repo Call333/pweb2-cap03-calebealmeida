@@ -115,7 +115,7 @@ const server = http.createServer(
             if (senha == "1234") {
                 res.writeHead(200, { "Content-Type": "text/plain" });
                 res.end("Acesso liberado");
-            } else if (senha == undefined) {
+            } else {
                 res.writeHead(401, { "Content-Type": "text/plain" });
                 res.end();
             }
