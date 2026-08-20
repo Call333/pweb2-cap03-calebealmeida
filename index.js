@@ -50,6 +50,21 @@ const server = http.createServer(
             return;
         }
 
+        if (req.method === "POST" && req.url === "/echo") {
+            let corpo = "";
+
+            req.on('data', dados => {
+                corpo += dados.toString();
+            })
+
+            req.on('end', () => {
+                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.end(corpo);
+            })
+
+            return;
+        }
+
         res.writeHead(404);
         res.end();
     }
