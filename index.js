@@ -20,6 +20,7 @@
 //
 // server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
 
+import { log } from 'node:console';
 import http from 'node:http';
 
 const host = "127.0.0.1";
@@ -38,6 +39,14 @@ const server = http.createServer(
             res.writeHead(200, { "Content-Type": "text/html" });
             res.write('<h1>Sobre</h1>');
             res.end();
+            return;
+        }
+
+        if (req.method === "GET" && req.url.startsWith("/saudacao/")) {
+            const partes = req.url.split('/');
+            const nome = partes[2]
+            res.writeHead(200, { "Content-type": "text/html" });
+            res.end(`Olá, ${nome}!`);
             return;
         }
 
