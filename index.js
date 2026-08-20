@@ -80,6 +80,12 @@ const server = http.createServer(
             return;
         }
 
+        if (req.method === "PATCH" && req.url === "/config") {
+            res.writeHead(200, { "Content-Type": "text"});
+            res.end("Configuração atualizada");
+            return;
+        }
+        
         res.writeHead(404);
         res.end();
     }
